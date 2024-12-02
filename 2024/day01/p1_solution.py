@@ -27,3 +27,4 @@ for left, right in zip(sorted_left, sorted_right):
 	total_distance += distance
 
 print(total_distance)
+# answer is 2285373

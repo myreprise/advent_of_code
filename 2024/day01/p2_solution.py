@@ -34,4 +34,4 @@ for number in left_list:
 	similarity_score += number * frequency
 
 print("Similarity score:", similarity_score)
-
+# answer is 21142653
