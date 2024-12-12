@@ -49,7 +49,6 @@ def simulate_stones(initial_stones, blinks):
     stone_counts = Counter(initial_stones)
 
     for i in range(blinks):
-        print(f"Blink no. {i+1}")
 
         new_counts = Counter()
 
@@ -69,7 +68,7 @@ def simulate_stones(initial_stones, blinks):
         
         # Update stone counts for the next blink
         stone_counts = new_counts
-        print(f"Stone counts: {sum(stone_counts.values())}")
+        print(f"Blink {i+1} | Stones: {sum(stone_counts.values())}")
     
     return sum(stone_counts.values())
 
