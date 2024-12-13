@@ -5,6 +5,7 @@ def parse_input(filename):
 
     return [line.strip() for line in lines]
 
+
 def is_nice_string(s):
     # condition 1: at least three vowels
     vowels = set("aeiou")
@@ -25,6 +26,7 @@ def is_nice_string(s):
 
     # return True if all conditions are met
     return True
+
 
 def count_nice_strings(strings):
     return sum(1 for s in strings if is_nice_string(s))

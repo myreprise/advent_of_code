@@ -6,14 +6,10 @@ def parse_dimensions(filename):
     dimensions = [tuple(map(int, line.split("x"))) for line in lines]
     return dimensions
 
-def parse_input(filename):
-    with open(filename, 'r') as file:
-        data = file.readlines()
-    
-    return [line.strip() for line in data]
 
 def get_dimensions(data):
     return [tuple(map(int, line.split('x'))) for line in data]
+
 
 def calculate_wrapping_paper(l, w, h):
     # Surface area of the box
@@ -24,9 +20,6 @@ def calculate_wrapping_paper(l, w, h):
     
     # Total wrapping paper needed for the present
     return surface_area + slack
-
-
-
 
 
 def total_wrapping_paper(dimensions_list):

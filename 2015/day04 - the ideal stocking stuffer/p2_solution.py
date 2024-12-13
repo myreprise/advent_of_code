@@ -23,7 +23,6 @@ def find_lowest_number_with_prefix(secret_key: str, prefix: str = "000000") -> i
 
 filename = 'input.txt'
 secret_key = parse_input(filename)
-
 lowest_number = find_lowest_number_with_prefix(secret_key=secret_key)
 print(lowest_number)
 # answer is 9958218

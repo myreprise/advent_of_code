@@ -18,7 +18,6 @@ def calculate_floor(instructions):
 
 filename = 'input.txt'
 instructions = parse_input(filename)
-
 result = calculate_floor(instructions=instructions)
 print(result)
 # answer is 138

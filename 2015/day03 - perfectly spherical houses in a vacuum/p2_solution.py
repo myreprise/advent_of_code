@@ -42,7 +42,6 @@ def count_unique_houses_with_robo_santa(directions):
 
 filename = 'input.txt'
 directions = parse_input(filename)
-
 result = count_unique_houses_with_robo_santa(directions=directions)
 print(result)
 # answer is 2631

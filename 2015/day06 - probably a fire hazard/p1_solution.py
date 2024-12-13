@@ -5,11 +5,13 @@ def parse_input(filename):
 
     return [line.strip() for line in lines]
 
+
 def initialize_grid(size):
     """
     Initialize a grid with all lights turned off
     """
     return [[0] * size for _ in range(size)]
+
 
 def apply_instructions(grid, instruction):
     """
@@ -39,6 +41,7 @@ def apply_instructions(grid, instruction):
             elif action == 'toggle':
                 grid[i][j] = 1 - grid[i][j]
 
+
 def count_lit_lights(grid):
     """
     Count the number of lights that are lit in the grid
@@ -48,7 +51,6 @@ def count_lit_lights(grid):
 
 filename = 'input.txt'
 instructions = parse_input(filename)
-
 grid_size = 1000
 grid = initialize_grid(grid_size)
 

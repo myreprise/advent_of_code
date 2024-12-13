@@ -29,10 +29,8 @@ def count_unique_houses(directions):
 
     return len(visited_houses)
 
-
 filename = 'input.txt'
 directions = parse_input(filename)
-
 result = count_unique_houses(directions=directions)
 print(result)
 # answer is 2572

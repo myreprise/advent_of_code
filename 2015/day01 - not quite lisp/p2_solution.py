@@ -19,7 +19,6 @@ def find_position_to_basement(instructions):
 
 filename = 'input.txt'
 instructions = parse_input(filename)
-
 result = find_position_to_basement(instructions=instructions)
 print(result)
 # answer is 1771
