@@ -87,6 +87,33 @@ def visualize_movement(robots, width, height, max_seconds, delay):
         
         # Pause for a short delay
 
+def visualize_grid_at_time(robots, width, height, time_point):
+    """
+    Visualize the robot positions on a grid at a specific point in time.
+    
+    Parameters:
+    - robots: List of (position, velocity) tuples.
+    - width: Width of the grid.
+    - height: Height of the grid.
+    - time_point: The specific time at which to visualize the grid.
+    """
+    # Calculate positions at the specified time point
+    positions = [
+        ((pos[0] + vel[0] * time_point) % width, (pos[1] + vel[1] * time_point) % height)
+        for pos, vel in robots
+    ]
+    
+    # Create a grid
+    grid = [['.' for _ in range(width)] for _ in range(height)]
+    for x, y in positions:
+        grid[y][x] = '#'
+    
+    # Print the grid
+    for row in grid:
+        print(''.join(row))
+
+
+
 
 filename = 'input.txt'
 data = import_data(filename)
@@ -105,4 +132,5 @@ else:
     print("Unique positions not achieved within the maximum time limit.")
 # answer is 6355
 
-visualize_movement(robots, WIDTH, HEIGHT, unique_time, DELAY)
+#visualize_movement(robots, WIDTH, HEIGHT, unique_time, DELAY)
+visualize_grid_at_time(robots, WIDTH, HEIGHT, unique_time)
