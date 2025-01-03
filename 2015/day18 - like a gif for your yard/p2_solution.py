@@ -1,72 +1,37 @@
+def count_neighbors(lights, x, y):
+    """Count the number of 'on' neighbors for the light at (x, y)."""
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    return sum((x + dx, y + dy) in lights for dx, dy in directions)
+
+def simulate_lights(initial_grid, steps):
+    """Simulate the grid for a given number of steps with corner lights fixed."""
+    corners = {(0, 0), (0, 99), (99, 0), (99, 99)}
+    
+    # Set of all lights that are on, starting with the initial configuration
+    lights = corners | {(x, y) for y, line in enumerate(initial_grid)
+                        for x, char in enumerate(line.strip())
+                        if char == '#'}
+    
+    # Simulation for the given number of steps
+    for _ in range(steps):
+        # Calculate the new set of lights that are on
+        new_lights = corners | {
+            (x, y) for x in range(100) for y in range(100)
+            if (x, y) in lights and 2 <= count_neighbors(lights, x, y) <= 3
+            or (x, y) not in lights and count_neighbors(lights, x, y) == 3
+        }
+        lights = new_lights
+    
+    # Return the number of lights that are on
+    return len(lights)
+
 
 def parse_input(filename):
     with open(filename, 'r') as file:
-        return [list(line.strip()) for line in file]
+        data = file.readlines()
+    return data
 
-
-def count_neighbors(grid, x, y):
-    """
-    Count the number of neighbors that are on.
-    """
-    directions = [(-1, 1), (-1, 0), (-1, -1), (0, 1), (0, -1), (1, 1), (1, 0), (1, -1)]
-    count = 0
-    for dx, dy in directions:
-        nx, ny = x + dx, y + dy
-        if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == '#':
-            count += 1
-    return count
-
-
-def update_grid(grid):
-    """
-    Update grid based on the rules.
-    """
-    new_grid = []
-    for x in range(len(grid)):
-        new_row = []
-        for y in range(len(grid[0])):
-            # Skip the four corner lights and keep them on
-            if (x == 0 and y == 0) or (x == 0 and y == len(grid[0])-1) or (x == len(grid)-1 and y == 0) or (x == len(grid)-1 and y == len(grid[0])-1):
-                new_row.append('#')
-            else:
-                on_neighbors = count_neighbors(grid, x, y)
-                if grid[x][y] == '#':
-                    if on_neighbors == 2 or on_neighbors == 3:
-                        new_row.append('#')
-                    else:
-                        new_row.append('.')
-                else:  # grid[x][y] == '.'
-                    if on_neighbors == 3:
-                        new_row.append('#')
-                    else:
-                        new_row.append('.')
-        new_grid.append(new_row)
-    return new_grid  # Return the updated grid
-
-
-def count_lights(grid):
-    """
-    Count the number of lights that are on ('#')
-    """
-    return sum(row.count('#') for row in grid)
-
-
-def simulate_lights(initial_grid, steps):
-    """Simulate the grid for a given number of steps."""
-    grid = initial_grid
-    for step in range(steps):
-        grid = update_grid(grid)  # Update grid and reassign to grid
-        # print(f"\nStep {step+1}:")
-        # for row in grid:
-        #     print("".join(row))
-    return count_lights(grid)  # Return the result after steps
-
-
-filename = 'input.txt'
-
-grid = parse_input(filename)
-result = simulate_lights(grid, 100)
-print(result)
+# Initial grid
+initial_grid = parse_input('input.txt')
+result = simulate_lights(initial_grid, 100)
 # answer is 886
-# answer is not 865 (too low)
-# answer is not 893 (too high)
