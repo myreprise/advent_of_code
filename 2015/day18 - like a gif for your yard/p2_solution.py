@@ -34,4 +34,5 @@ def parse_input(filename):
 # Initial grid
 initial_grid = parse_input('input.txt')
 result = simulate_lights(initial_grid, 100)
+print(result)
 # answer is 886
